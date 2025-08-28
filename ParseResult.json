@@ -1,0 +1,89 @@
+[
+  {
+    "Text": {
+      "location": {
+        "start": 0,
+        "end": 10
+      },
+      "content": "something\r"
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 10,
+        "end": 11
+      },
+      "content": "\n"
+    }
+  },
+  {
+    "Header": {
+      "location": {
+        "start": 11,
+        "end": 20
+      },
+      "level": 3,
+      "is_folded": false,
+      "content": [
+        {
+          "Text": {
+            "location": {
+              "start": 15,
+              "end": 19
+            },
+            "content": "wow\r"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 20,
+        "end": 25
+      },
+      "content": "sans\r"
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 25,
+        "end": 26
+      },
+      "content": "\n"
+    }
+  },
+  {
+    "Header": {
+      "location": {
+        "start": 26,
+        "end": 45
+      },
+      "level": 2,
+      "is_folded": true,
+      "content": [
+        {
+          "Text": {
+            "location": {
+              "start": 30,
+              "end": 44
+            },
+            "content": "folded header\r"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 45,
+        "end": 49
+      },
+      "content": "sans"
+    }
+  }
+]
