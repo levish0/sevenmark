@@ -7,12 +7,12 @@ use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_until};
 
-pub fn markdown_bold_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
+pub fn markdown_underline_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
     let parsed_content = delimited(
-        literal("**"),
-        take_until(0.., "**").verify(|s: &str| !s.contains('\n')),
-        literal("**"),
+        literal("__"),
+        take_until(0.., "__").verify(|s: &str| !s.contains('\n')),
+        literal("__"),
     )
     .parse_next(parser_input)?;
     let end = parser_input.input.previous_token_end() + parser_input.state.base_offset;
@@ -29,7 +29,7 @@ pub fn markdown_bold_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenM
 
     let parsed_content = element_parser(&mut content_stateful)?;
 
-    Ok(vec![SevenMarkElement::Bold(TextStyle {
+    Ok(vec![SevenMarkElement::Underline(TextStyle {
         location: Location { start, end },
         content: parsed_content,
     })])

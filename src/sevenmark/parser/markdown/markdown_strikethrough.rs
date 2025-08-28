@@ -7,8 +7,9 @@ use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_until};
 
-
-pub fn markdown_strikethrough_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
+pub fn markdown_strikethrough_parser(
+    parser_input: &mut ParserInput,
+) -> Result<Vec<SevenMarkElement>> {
     let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
     let parsed_content = delimited(
         literal("~~"),
@@ -27,7 +28,7 @@ pub fn markdown_strikethrough_parser(parser_input: &mut ParserInput) -> Result<V
         input: InputSource::new(parsed_content),
         state: new_state,
     };
-    
+
     let parsed_content = element_parser(&mut content_stateful)?;
 
     Ok(vec![SevenMarkElement::Strikethrough(TextStyle {

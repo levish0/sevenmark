@@ -1,7 +1,7 @@
 use crate::sevenmark::SevenMarkError;
 
 /// 파싱 컨텍스트 - 재귀 깊이와 상태를 관리
-/// 
+///
 /// 이 구조체는 파싱 과정에서 다음을 관리합니다:
 /// - 재귀 깊이 제한을 통한 무한 재귀 방지
 /// - 각주 중첩 방지
@@ -64,7 +64,6 @@ impl ParseContext {
         })
     }
 
-
     /// 새 오프셋과 함께 재귀 깊이를 증가시킨 새 컨텍스트 반환
     pub fn with_offset(&self, offset: usize) -> Result<Self, SevenMarkError> {
         let new_depth = self.next_depth_checked()?;
@@ -75,7 +74,6 @@ impl ParseContext {
             base_offset: offset,
         })
     }
-
 
     /// 각주 컨텍스트로 전환한 새 컨텍스트 반환
     pub fn with_footnote_context(&self) -> Result<Self, SevenMarkError> {
@@ -112,7 +110,8 @@ impl ParseContext {
 
     /// 남은 재귀 깊이 반환
     pub fn remaining_depth(&self) -> usize {
-        self.max_recursion_depth.saturating_sub(self.recursion_depth)
+        self.max_recursion_depth
+            .saturating_sub(self.recursion_depth)
     }
 }
 

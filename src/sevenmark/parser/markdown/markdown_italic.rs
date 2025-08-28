@@ -7,7 +7,6 @@ use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_until};
 
-
 pub fn markdown_italic_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
     let parsed_content = delimited(
@@ -23,12 +22,10 @@ pub fn markdown_italic_parser(parser_input: &mut ParserInput) -> Result<Vec<Seve
         .with_offset(start + 1)
         .map_err(|e| e.into_context_error())?;
 
-
     let mut nested_parser = ParserInput {
         input: InputSource::new(parsed_content),
         state: new_context,
     };
-
 
     let parsed_content = element_parser(&mut nested_parser)?;
 

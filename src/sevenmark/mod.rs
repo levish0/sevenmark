@@ -6,4 +6,4 @@ pub mod parser;
 pub use ast::*;
 pub use context::*;
 pub use error::*;
-pub use parser::{parse_document, InputSource, ParserInput};
+pub use parser::{InputSource, ParserInput, parse_document};
