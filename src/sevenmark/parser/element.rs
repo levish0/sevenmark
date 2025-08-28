@@ -13,7 +13,6 @@ use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
 
-/// 요소 파서 - 다양한 SevenMark 요소들을 파싱
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     // println!("{:?}", parser_input.state);
     // println!("{:?}", parser_input.input);
