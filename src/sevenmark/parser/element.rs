@@ -12,15 +12,25 @@ use winnow::Result;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
+use crate::sevenmark::parser::brace::brace_literal_parser;
+use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
-    // println!("{:?}", parser_input.state);
-    // println!("{:?}", parser_input.input);
+    println!("{:?}", parser_input.state);
+    println!("{:?}", parser_input.input);
 
     let result = repeat(
         1..,
         alt((
+            // Escape
             escape_parser,
+            // Comment
+            multiline_comment_parser,
+            inline_comment_parser,
+            // Brace
+            alt((
+                brace_literal_parser,
+            )),
             alt((
                 markdown_header_parser,
                 markdown_hline_parser,
@@ -31,8 +41,10 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
                 markdown_strikethrough_parser,
                 markdown_superscript_parser,
                 markdown_subscript_parser,
-                text_parser,
             )),
+            // Text,
+            text_parser,
+            // Token,
             token_newline_parser,
             token_brace_open_parser,
             token_brace_close_parser,

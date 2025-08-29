@@ -19,7 +19,7 @@ pub fn markdown_bolditalic_parser(parser_input: &mut ParserInput) -> Result<Seve
 
     let new_state = parser_input
         .state
-        .with_offset(start + 3)
+        .with_offset(start+3)
         .map_err(|e| e.into_context_error())?;
 
     let mut content_stateful = ParserInput {

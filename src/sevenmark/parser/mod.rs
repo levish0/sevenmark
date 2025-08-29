@@ -9,6 +9,8 @@ pub mod markdown;
 mod parameter;
 pub mod text;
 pub mod token;
+mod comment;
+mod brace;
 
 pub use document::parse_document;
 

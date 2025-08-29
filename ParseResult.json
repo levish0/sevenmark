@@ -1,36 +1,18 @@
 [
   {
-    "Bold": {
+    "Literal": {
       "location": {
         "start": 0,
-        "end": 15
+        "end": 23
       },
       "content": [
         {
           "Text": {
             "location": {
-              "start": 2,
-              "end": 6
-            },
-            "content": "bold"
-          }
-        },
-        {
-          "Text": {
-            "location": {
               "start": 6,
-              "end": 7
+              "end": 20
             },
-            "content": "*"
-          }
-        },
-        {
-          "Text": {
-            "location": {
-              "start": 7,
-              "end": 13
-            },
-            "content": "italic"
+            "content": "**asdasdassd**"
           }
         }
       ]
@@ -39,10 +21,29 @@
   {
     "Text": {
       "location": {
-        "start": 15,
-        "end": 16
+        "start": 23,
+        "end": 24
       },
-      "content": "*"
+      "content": " "
+    }
+  },
+  {
+    "Bold": {
+      "location": {
+        "start": 24,
+        "end": 32
+      },
+      "content": [
+        {
+          "Text": {
+            "location": {
+              "start": 26,
+              "end": 30
+            },
+            "content": "bold"
+          }
+        }
+      ]
     }
   }
 ]

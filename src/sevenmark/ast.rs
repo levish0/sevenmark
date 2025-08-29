@@ -198,7 +198,7 @@ pub enum SevenMarkElement {
     Escape(EscapeElement),
 
     // Block elements
-    LiteralElement(LiteralElement),
+    Literal(LiteralElement),
     StyledElement(StyledElement),
     TableElement(TableElement),
     ListElement(ListElement),
