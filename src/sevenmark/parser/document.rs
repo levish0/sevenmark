@@ -10,7 +10,7 @@ use winnow::stream::Location;
 /// 메인 문서 파서 - 전체 입력을 파싱
 pub fn parse_document(input: &str) -> Vec<SevenMarkElement> {
     let normalized_input = input.replace("\r\n", "\n");
-    
+
     let context = ParseContext::new();
     let mut stateful_input = ParserInput {
         input: InputSource::new(&normalized_input),

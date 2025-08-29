@@ -8,12 +8,13 @@ use winnow::token::take_while;
 /// Parse literal text within braces (excludes literal syntax symbols)
 /// Reads characters except: {, }, \, newline
 pub fn literal_text_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
-    let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
-    let content = take_while(1.., |c: char| !matches!(c, '{' | '}' | '\\' | '\n')).parse_next(parser_input)?;
-    let end = parser_input.input.previous_token_end() + parser_input.state.base_offset;
+    let start = parser_input.input.current_token_start();
+    let parsed_content = take_while(1.., |c: char| !matches!(c, '{' | '}' | '\\' | '\n'))
+        .parse_next(parser_input)?;
+    let end = parser_input.input.previous_token_end();
 
     Ok(SevenMarkElement::Text(TextElement {
         location: Location { start, end },
-        content: content.to_string(),
+        content: parsed_content.to_string(),
     }))
 }

@@ -180,6 +180,7 @@ pub struct IncludeElement {
 /// 카테고리 요소
 #[derive(Debug, Clone, Serialize)]
 pub struct CategoryElement {
+    pub location: Location,
     pub content: Vec<SevenMarkElement>,
 }
 

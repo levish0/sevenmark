@@ -16,14 +16,21 @@ pub fn markdown_underline_parser(parser_input: &mut ParserInput) -> Result<Seven
         literal("__"),
         |input: &mut ParserInput| {
             let mut inner_input = input.clone();
-            inner_input.state.increase_depth().map_err(|e| e.into_context_error())?;
+            inner_input
+                .state
+                .increase_depth()
+                .map_err(|e| e.into_context_error())?;
             inner_input.state.set_underline_context();
             let result = element_parser(&mut inner_input);
             inner_input.state.unset_underline_context();
-            inner_input.state.decrease_depth().map_err(|e| e.into_context_error())?;
+            inner_input
+                .state
+                .decrease_depth()
+                .map_err(|e| e.into_context_error())?;
             *input = inner_input;
             result
-        },  literal("__"),
+        },
+        literal("__"),
     )
     .parse_next(parser_input)?;
     let end = parser_input.input.previous_token_end();

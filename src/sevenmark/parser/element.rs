@@ -1,19 +1,21 @@
 use super::escape::escape_parser;
 use super::markdown::{
-    markdown_bold_parser, markdown_header_parser,
-    markdown_hline_parser, markdown_italic_parser, markdown_strikethrough_parser,
-    markdown_subscript_parser, markdown_superscript_parser, markdown_underline_parser,
+    markdown_bold_parser, markdown_header_parser, markdown_hline_parser, markdown_italic_parser,
+    markdown_strikethrough_parser, markdown_subscript_parser, markdown_superscript_parser,
+    markdown_underline_parser,
 };
 use super::text::text_parser;
 use super::token::*;
 use crate::sevenmark::ast::SevenMarkElement;
+use crate::sevenmark::parser::brace::{
+    brace_category_parser, brace_literal_parser, brace_style_parser,
+};
+use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
 use crate::sevenmark::{InputSource, ParserInput};
 use winnow::Result;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
-use crate::sevenmark::parser::brace::brace_literal_parser;
-use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let result = repeat(
@@ -26,6 +28,8 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
             inline_comment_parser,
             // Brace
             alt((
+                brace_category_parser,
+                brace_style_parser,
                 brace_literal_parser,
             )),
             alt((

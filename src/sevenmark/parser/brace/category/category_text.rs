@@ -5,16 +5,10 @@ use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::take_while;
 
-/// 특수문자가 아닌 일반 텍스트 파싱 (기존 md_content_parser 역할)
-pub fn text_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
+pub fn category_text_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start();
-    let parsed_content = take_while(1.., |c: char| {
-        !matches!(
-            c,
-            '*' | '~' | '_' | '^' | ',' | '{' | '}' | '[' | ']' | '\\' | '\n'
-        )
-    })
-    .parse_next(parser_input)?;
+    let parsed_content =
+        take_while(1.., |c: char| !matches!(c, '{' | '}' | '\\')).parse_next(parser_input)?;
     let end = parser_input.input.previous_token_end();
 
     Ok(SevenMarkElement::Text(TextElement {

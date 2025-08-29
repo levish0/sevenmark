@@ -2,6 +2,8 @@ use crate::sevenmark::context::ParseContext;
 use winnow::Result;
 use winnow::stream::{LocatingSlice, Stateful};
 
+mod brace;
+mod comment;
 pub mod document;
 pub mod element;
 pub mod escape;
@@ -9,8 +11,7 @@ pub mod markdown;
 mod parameter;
 pub mod text;
 pub mod token;
-mod comment;
-mod brace;
+mod utils;
 
 pub use document::parse_document;
 

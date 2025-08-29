@@ -16,11 +16,17 @@ pub fn markdown_italic_parser(parser_input: &mut ParserInput) -> Result<SevenMar
         literal("*"),
         |input: &mut ParserInput| {
             let mut inner_input = input.clone();
-            inner_input.state.increase_depth().map_err(|e| e.into_context_error())?;
+            inner_input
+                .state
+                .increase_depth()
+                .map_err(|e| e.into_context_error())?;
             inner_input.state.set_italic_context();
             let result = element_parser(&mut inner_input);
             inner_input.state.unset_italic_context();
-            inner_input.state.decrease_depth().map_err(|e| e.into_context_error())?;
+            inner_input
+                .state
+                .decrease_depth()
+                .map_err(|e| e.into_context_error())?;
             *input = inner_input;
             result
         },

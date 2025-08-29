@@ -29,7 +29,6 @@ pub struct ParseContext {
     pub inside_superscript: bool,
     pub inside_underline: bool,
     pub max_recursion_depth: usize,
-    pub base_offset: usize,
 }
 
 impl ParseContext {
@@ -45,7 +44,6 @@ impl ParseContext {
             inside_superscript: false,
             inside_underline: false,
             max_recursion_depth: 16,
-            base_offset: 0,
         }
     }
 

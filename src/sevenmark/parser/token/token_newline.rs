@@ -1,7 +1,7 @@
-use winnow::ascii::line_ending;
 use crate::sevenmark::ast::SevenMarkElement;
 use crate::sevenmark::{Location, ParserInput, TextElement};
 use winnow::Result;
+use winnow::ascii::line_ending;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;

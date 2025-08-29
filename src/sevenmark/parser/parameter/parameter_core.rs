@@ -8,7 +8,7 @@ use winnow::combinator::{delimited, opt, preceded, repeat, terminated};
 use winnow::prelude::*;
 use winnow::token::literal;
 
-/// Parse a single parameter in the format #key="value" 
+/// Parse a single parameter in the format #key="value"
 /// The value part is optional - if not provided, an empty Vec is used
 fn parameter_parser(parser_input: &mut ParserInput) -> Result<(String, Vec<SevenMarkElement>)> {
     // Parse: whitespace, #key, optional ="value", whitespace

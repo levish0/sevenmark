@@ -11,7 +11,7 @@ pub fn token_underscore_parser(parser_input: &mut ParserInput) -> Result<SevenMa
             return Err(winnow::error::ContextError::new());
         }
     }
-    
+
     let start = parser_input.input.current_token_start();
     literal("_").parse_next(parser_input)?;
     let end = parser_input.input.previous_token_end();
