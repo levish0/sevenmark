@@ -230,6 +230,7 @@ pub enum SevenMarkElement {
     Null,
     FootNote,
     TimeNow,
+    NewLine,
     Age(String),
     Variable(String),
 
