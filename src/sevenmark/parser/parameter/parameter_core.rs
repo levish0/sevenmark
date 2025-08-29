@@ -1,12 +1,12 @@
+use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{Parameters, SevenMarkElement};
 use crate::sevenmark::parser::parameter::parameter_content::parameter_content_parser;
-use crate::sevenmark::ParserInput;
 use std::collections::HashMap;
+use winnow::Result;
 use winnow::ascii::{alphanumeric1, multispace0};
 use winnow::combinator::{delimited, opt, preceded, repeat, terminated};
 use winnow::prelude::*;
 use winnow::token::literal;
-use winnow::Result;
 
 /// Parse a single parameter in the format #key="value"
 /// The value part is optional - if not provided, an empty Vec is used

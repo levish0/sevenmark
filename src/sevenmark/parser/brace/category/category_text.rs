@@ -1,9 +1,9 @@
-use crate::sevenmark::ast::{Location, SevenMarkElement, TextElement};
 use crate::sevenmark::ParserInput;
+use crate::sevenmark::ast::{Location, SevenMarkElement, TextElement};
+use winnow::Result;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::take_while;
-use winnow::Result;
 
 pub fn category_text_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start();

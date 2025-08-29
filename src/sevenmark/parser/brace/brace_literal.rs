@@ -1,11 +1,11 @@
 use super::literal::literal_content_parser;
-use crate::sevenmark::ast::{LiteralElement, Location, SevenMarkElement};
 use crate::sevenmark::ParserInput;
+use crate::sevenmark::ast::{LiteralElement, Location, SevenMarkElement};
+use winnow::Result;
 use winnow::combinator::delimited;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;
-use winnow::Result;
 
 /// Parse literal elements enclosed in {{{ }}}
 pub fn brace_literal_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {

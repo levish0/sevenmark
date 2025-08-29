@@ -1,122 +1,29 @@
 [
   {
-    "StyledElement": {
+    "CodeElement": {
       "location": {
         "start": 0,
-        "end": 40
+        "end": 37
       },
-      "common_style": {
-        "style": [
-          {
-            "Text": {
-              "location": {
-                "start": 11,
-                "end": 13
-              },
-              "content": "xx"
-            }
-          }
-        ],
-        "size": [
-          {
-            "Text": {
-              "location": {
-                "start": 22,
-                "end": 23
-              },
-              "content": "4"
-            }
-          }
-        ]
-      },
-      "content": [
+      "language": [
         {
           "Text": {
             "location": {
-              "start": 28,
-              "end": 37
+              "start": 16,
+              "end": 22
             },
-            "content": "something"
+            "content": "python"
           }
         }
-      ]
-    }
-  },
-  {
-    "Text": {
-      "location": {
-        "start": 40,
-        "end": 41
-      },
-      "content": "\n"
-    }
-  },
-  {
-    "Category": {
-      "location": {
-        "start": 41,
-        "end": 61
-      },
+      ],
       "content": [
         {
           "Text": {
             "location": {
-              "start": 54,
-              "end": 58
+              "start": 24,
+              "end": 34
             },
-            "content": "what"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "Text": {
-      "location": {
-        "start": 61,
-        "end": 62
-      },
-      "content": "\n"
-    }
-  },
-  {
-    "Include": {
-      "location": {
-        "start": 62,
-        "end": 96
-      },
-      "parameters": {
-        "y": [
-          {
-            "Text": {
-              "location": {
-                "start": 85,
-                "end": 87
-              },
-              "content": "xx"
-            }
-          }
-        ],
-        "x": [
-          {
-            "Text": {
-              "location": {
-                "start": 78,
-                "end": 79
-              },
-              "content": "1"
-            }
-          }
-        ]
-      },
-      "content": [
-        {
-          "Text": {
-            "location": {
-              "start": 89,
-              "end": 93
-            },
-            "content": "what"
+            "content": "let a = b\n"
           }
         }
       ]

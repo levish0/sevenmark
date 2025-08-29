@@ -1,10 +1,10 @@
-use crate::sevenmark::ast::{CommentElement, Location, SevenMarkElement};
 use crate::sevenmark::ParserInput;
+use crate::sevenmark::ast::{CommentElement, Location, SevenMarkElement};
+use winnow::Result;
 use winnow::combinator::delimited;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_until};
-use winnow::Result;
 
 /// Parse multiline comments delimited by /* and */
 /// Takes all content between the delimiters

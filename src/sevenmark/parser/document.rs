@@ -2,10 +2,10 @@ use super::element::element_parser;
 use super::{InputSource, ParserInput};
 use crate::sevenmark::ast::{SevenMarkElement, TextElement};
 use crate::sevenmark::context::ParseContext;
+use winnow::Result;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
 use winnow::stream::Location;
-use winnow::Result;
 
 /// 메인 문서 파서 - 전체 입력을 파싱
 pub fn parse_document(input: &str) -> Vec<SevenMarkElement> {

@@ -3,11 +3,11 @@ use super::super::parameter::parameter_core_parser;
 use crate::sevenmark::ast::{SevenMarkElement, StyledElement};
 use crate::sevenmark::parser::utils::utils_get_common_style;
 use crate::sevenmark::{Location, ParserInput};
+use winnow::Result;
 use winnow::combinator::delimited;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;
-use winnow::Result;
 
 /// Parse styled elements enclosed in {{{ }}}
 pub fn brace_style_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {

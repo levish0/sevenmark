@@ -148,6 +148,12 @@ pub struct CodeElement {
     pub content: Vec<SevenMarkElement>,
 }
 
+#[derive(Debug, Clone, Serialize)]
+pub struct TeXElement {
+    pub location: Location,
+    pub content: String,
+}
+
 /// 각주
 #[derive(Debug, Clone, Serialize)]
 pub struct FootnoteElement {
@@ -209,6 +215,7 @@ pub enum SevenMarkElement {
     RubyElement(RubyElement),
     FootnoteElement(FootnoteElement),
     CodeElement(CodeElement),
+    TeXElement(TeXElement),
 
     // Wiki elements
     Include(IncludeElement),
@@ -223,7 +230,6 @@ pub enum SevenMarkElement {
     FootNote,
     TimeNow,
     Age(String),
-    TeX(String),
     Variable(String),
 
     // Markdown text styles

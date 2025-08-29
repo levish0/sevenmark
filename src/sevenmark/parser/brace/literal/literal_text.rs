@@ -1,9 +1,9 @@
-use crate::sevenmark::ast::{Location, SevenMarkElement, TextElement};
 use crate::sevenmark::ParserInput;
+use crate::sevenmark::ast::{Location, SevenMarkElement, TextElement};
+use winnow::Result;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::take_while;
-use winnow::Result;
 
 /// Parse literal text within braces (excludes literal syntax symbols)
 /// Reads characters except: {, }, \, newline

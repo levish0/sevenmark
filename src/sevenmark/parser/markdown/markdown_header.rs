@@ -1,13 +1,13 @@
 use super::super::element::element_parser;
-use crate::sevenmark::ast::{Header, Location, SevenMarkElement};
 use crate::sevenmark::ParserInput;
+use crate::sevenmark::ast::{Header, Location, SevenMarkElement};
+use winnow::Result;
 use winnow::ascii::line_ending;
 use winnow::combinator::eof;
 use winnow::combinator::{alt, opt, terminated};
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_while};
-use winnow::Result;
 
 /// 헤더 파서 - # Header (1-6개의 # 지원, ! 폴딩 지원)  
 pub fn markdown_header_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
