@@ -10,7 +10,7 @@ use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_till, take_while};
 
 /// 헤더 파서 - # Header (1-6개의 # 지원, ! 폴딩 지원)  
-pub fn markdown_header_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
+pub fn markdown_header_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
 
     let (header_marks, is_folded, (_, content)) = (
@@ -39,10 +39,10 @@ pub fn markdown_header_parser(parser_input: &mut ParserInput) -> Result<Vec<Seve
 
     let parsed_content = element_parser(&mut nested_parser)?;
 
-    Ok(vec![SevenMarkElement::Header(Header {
+    Ok(SevenMarkElement::Header(Header {
         location: Location { start, end },
         level: header_level,
         is_folded,
         content: parsed_content,
-    })])
+    }))
 }

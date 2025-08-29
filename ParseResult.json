@@ -1,11 +1,48 @@
 [
   {
-    "Text": {
+    "Bold": {
       "location": {
         "start": 0,
-        "end": 9
+        "end": 15
       },
-      "content": "---------"
+      "content": [
+        {
+          "Text": {
+            "location": {
+              "start": 2,
+              "end": 6
+            },
+            "content": "bold"
+          }
+        },
+        {
+          "Text": {
+            "location": {
+              "start": 6,
+              "end": 7
+            },
+            "content": "*"
+          }
+        },
+        {
+          "Text": {
+            "location": {
+              "start": 7,
+              "end": 13
+            },
+            "content": "italic"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 15,
+        "end": 16
+      },
+      "content": "*"
     }
   }
 ]

@@ -7,7 +7,7 @@ use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_until};
 
-pub fn markdown_underline_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
+pub fn markdown_underline_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start() + parser_input.state.base_offset;
     let parsed_content = delimited(
         literal("__"),
@@ -29,8 +29,8 @@ pub fn markdown_underline_parser(parser_input: &mut ParserInput) -> Result<Vec<S
 
     let parsed_content = element_parser(&mut content_stateful)?;
 
-    Ok(vec![SevenMarkElement::Underline(TextStyle {
+    Ok(SevenMarkElement::Underline(TextStyle {
         location: Location { start, end },
         content: parsed_content,
-    })])
+    }))
 }

@@ -6,6 +6,7 @@ pub mod document;
 pub mod element;
 pub mod escape;
 pub mod markdown;
+mod parameter;
 pub mod text;
 pub mod token;
 

@@ -46,7 +46,6 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
             token_comma_parser,
         )),
     )
-    .map(|elements: Vec<_>| elements.into_iter().flatten().collect())
     .parse_next(parser_input);
 
     result
