@@ -1,32 +1,31 @@
 [
   {
-    "CodeElement": {
+    "TeXElement": {
       "location": {
         "start": 0,
-        "end": 37
+        "end": 19
       },
-      "language": [
-        {
-          "Text": {
-            "location": {
-              "start": 16,
-              "end": 22
-            },
-            "content": "python"
-          }
-        }
-      ],
-      "content": [
-        {
-          "Text": {
-            "location": {
-              "start": 24,
-              "end": 34
-            },
-            "content": "let a = b\n"
-          }
-        }
-      ]
+      "is_block": true,
+      "content": "a"
+    }
+  },
+  {
+    "Text": {
+      "location": {
+        "start": 19,
+        "end": 20
+      },
+      "content": "\n"
+    }
+  },
+  {
+    "TeXElement": {
+      "location": {
+        "start": 20,
+        "end": 32
+      },
+      "is_block": false,
+      "content": "\na"
     }
   }
 ]

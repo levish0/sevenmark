@@ -1,3 +1,4 @@
-{{{#code #lang="python"
-let a = b
-}}}
+{{{#tex
+#block a}}}
+{{{#tex
+a}}}

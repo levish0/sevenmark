@@ -151,6 +151,7 @@ pub struct CodeElement {
 #[derive(Debug, Clone, Serialize)]
 pub struct TeXElement {
     pub location: Location,
+    pub is_block: bool,
     pub content: String,
 }
 
