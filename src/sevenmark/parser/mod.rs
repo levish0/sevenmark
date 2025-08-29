@@ -11,6 +11,7 @@ mod parameter;
 pub mod text;
 pub mod token;
 mod utils;
+mod r#macro;
 
 pub use document::parse_document;
 

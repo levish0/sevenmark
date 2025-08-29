@@ -17,6 +17,7 @@ use winnow::Result;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
+use crate::sevenmark::parser::r#macro::macro_null_parser;
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let result = repeat(
@@ -45,6 +46,9 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
                 markdown_strikethrough_parser,
                 markdown_superscript_parser,
                 markdown_subscript_parser,
+            )),
+            alt((
+                macro_null_parser,
             )),
             // Text,
             text_parser,
