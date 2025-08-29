@@ -1,20 +1,34 @@
 use crate::sevenmark::SevenMarkError;
 
-/// 파싱 컨텍스트 - 재귀 깊이와 상태를 관리
-///
-/// 이 구조체는 파싱 과정에서 다음을 관리합니다:
-/// - 재귀 깊이 제한을 통한 무한 재귀 방지
-/// - 각주 중첩 방지
-/// - 파싱 위치 추적을 위한 오프셋 관리
+macro_rules! context_setters {
+    ($($name:ident => $field:ident),*) => {
+        $(
+            paste::paste! {
+                /// [<$name:upper>] 컨텍스트로 전환
+                pub fn [<set_ $name _context>](&mut self) {
+                    self.$field = true;
+                }
+
+                /// [<$name:upper>] 컨텍스트 해제
+                pub fn [<unset_ $name _context>](&mut self) {
+                    self.$field = false;
+                }
+            }
+        )*
+    };
+}
+
 #[derive(Debug, Clone, Copy)]
 pub struct ParseContext {
-    /// 현재 재귀 깊이
     pub recursion_depth: usize,
-    /// 각주 내부에서 파싱 중인지 여부 (중첩 각주 방지)
-    pub in_footnote_context: bool,
-    /// 최대 재귀 깊이
+    pub inside_header: bool,
+    pub inside_bold: bool,
+    pub inside_italic: bool,
+    pub inside_strikethrough: bool,
+    pub inside_subscript: bool,
+    pub inside_superscript: bool,
+    pub inside_underline: bool,
     pub max_recursion_depth: usize,
-    /// 파싱 시작점의 기준 오프셋 (중첩 파싱 시 위치 계산용)
     pub base_offset: usize,
 }
 
@@ -23,14 +37,20 @@ impl ParseContext {
     pub fn new() -> Self {
         Self {
             recursion_depth: 0,
-            in_footnote_context: false,
-            max_recursion_depth: 16, // 기존 MAX_RECURSION_DEPTH와 동일
+            inside_header: false,
+            inside_bold: false,
+            inside_italic: false,
+            inside_strikethrough: false,
+            inside_subscript: false,
+            inside_superscript: false,
+            inside_underline: false,
+            max_recursion_depth: 16,
             base_offset: 0,
         }
     }
 
-    /// 재귀 깊이를 1 증가시키고 제한을 체크한 후 새로운 깊이 반환
-    fn next_depth_checked(&self) -> Result<usize, SevenMarkError> {
+    /// 재귀 깊이 증가 (in-place)
+    pub fn increase_depth(&mut self) -> Result<(), SevenMarkError> {
         let new_depth = self.recursion_depth + 1;
         if new_depth > self.max_recursion_depth {
             return Err(SevenMarkError::RecursionDepthExceeded {
@@ -38,64 +58,20 @@ impl ParseContext {
                 max_depth: self.max_recursion_depth,
             });
         }
-        Ok(new_depth)
+        self.recursion_depth = new_depth;
+        Ok(())
     }
 
-    /// 재귀 깊이를 1 증가시킨 새 컨텍스트 반환
-    pub fn with_increased_depth(&self) -> Result<Self, SevenMarkError> {
-        let new_depth = self.next_depth_checked()?;
-        Ok(Self {
-            recursion_depth: new_depth,
-            ..*self
-        })
-    }
-
-    /// 재귀 깊이를 1 감소시킨 새 컨텍스트 반환
-    pub fn with_decreased_depth(&self) -> Result<Self, SevenMarkError> {
+    /// 재귀 깊이 감소 (in-place)
+    pub fn decrease_depth(&mut self) -> Result<(), SevenMarkError> {
         if self.recursion_depth == 0 {
             return Err(SevenMarkError::RecursionDepthExceeded {
                 depth: 0,
                 max_depth: self.max_recursion_depth,
             });
         }
-        Ok(Self {
-            recursion_depth: self.recursion_depth - 1,
-            ..*self
-        })
-    }
-
-    /// 새 오프셋과 함께 재귀 깊이를 증가시킨 새 컨텍스트 반환
-    pub fn with_offset(&self, offset: usize) -> Result<Self, SevenMarkError> {
-        let new_depth = self.next_depth_checked()?;
-        Ok(Self {
-            recursion_depth: new_depth,
-            in_footnote_context: self.in_footnote_context,
-            max_recursion_depth: self.max_recursion_depth,
-            base_offset: offset,
-        })
-    }
-
-    /// 각주 컨텍스트로 전환한 새 컨텍스트 반환
-    pub fn with_footnote_context(&self) -> Result<Self, SevenMarkError> {
-        let new_depth = self.next_depth_checked()?;
-        Ok(Self {
-            recursion_depth: new_depth,
-            in_footnote_context: true,
-            max_recursion_depth: self.max_recursion_depth,
-            base_offset: 0,
-        })
-    }
-
-    pub fn without_footnote_context(&self) -> Self {
-        Self {
-            in_footnote_context: false,
-            ..*self
-        }
-    }
-
-    /// 현재 각주 컨텍스트에 있는지 확인
-    pub fn is_in_footnote(&self) -> bool {
-        self.in_footnote_context
+        self.recursion_depth -= 1;
+        Ok(())
     }
 
     /// 최대 재귀 깊이에 도달했는지 확인
@@ -112,6 +88,16 @@ impl ParseContext {
     pub fn remaining_depth(&self) -> usize {
         self.max_recursion_depth
             .saturating_sub(self.recursion_depth)
+    }
+
+    context_setters! {
+        header => inside_header,
+        bold => inside_bold,
+        italic => inside_italic,
+        strikethrough => inside_strikethrough,
+        subscript => inside_subscript,
+        superscript => inside_superscript,
+        underline => inside_underline
     }
 }
 

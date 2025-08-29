@@ -11,7 +11,7 @@ pub fn text_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let parsed_content = take_while(1.., |c: char| {
         !matches!(
             c,
-            '*' | '~' | '_' | '/' | '^' | ',' | '{' | '}' | '[' | ']' | '\\' | '\n'
+            '*' | '~' | '_' | '^' | ',' | '{' | '}' | '[' | ']' | '\\' | '\n'
         )
     })
     .parse_next(parser_input)?;

@@ -1,6 +1,6 @@
 use super::escape::escape_parser;
 use super::markdown::{
-    markdown_bold_parser, markdown_bolditalic_parser, markdown_header_parser,
+    markdown_bold_parser, markdown_header_parser,
     markdown_hline_parser, markdown_italic_parser, markdown_strikethrough_parser,
     markdown_subscript_parser, markdown_superscript_parser, markdown_underline_parser,
 };
@@ -16,9 +16,6 @@ use crate::sevenmark::parser::brace::brace_literal_parser;
 use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
-    println!("{:?}", parser_input.state);
-    println!("{:?}", parser_input.input);
-
     let result = repeat(
         1..,
         alt((
@@ -34,7 +31,6 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
             alt((
                 markdown_header_parser,
                 markdown_hline_parser,
-                markdown_bolditalic_parser,
                 markdown_bold_parser,
                 markdown_italic_parser,
                 markdown_underline_parser,
@@ -50,15 +46,14 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
             token_brace_close_parser,
             token_bracket_open_parser,
             token_bracket_close_parser,
-            token_slash_parser,
             token_asterisk_parser,
             token_underscore_parser,
             token_tilde_parser,
             token_caret_parser,
             token_comma_parser,
+            token_backslash_parser,
         )),
     )
     .parse_next(parser_input);
-
     result
 }

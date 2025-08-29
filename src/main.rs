@@ -7,9 +7,8 @@ fn main() {
     let document_len = input_content.len();
 
     println!(
-        "Input ({} bytes):\n{}\n{}\n",
+        "Input ({} bytes):\n{}\n",
         document_len,
-        input_content,
         "=".repeat(50)
     );
 
