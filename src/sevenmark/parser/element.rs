@@ -7,16 +7,14 @@ use super::markdown::{
 use super::text::text_parser;
 use super::token::*;
 use crate::sevenmark::ast::SevenMarkElement;
-use crate::sevenmark::parser::brace::{
-    brace_category_parser, brace_literal_parser, brace_style_parser,
-};
+use crate::sevenmark::parser::brace::{brace_category_parser, brace_code_parser, brace_include_parser, brace_literal_parser, brace_style_parser};
 use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
 use crate::sevenmark::ParserInput;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
 use winnow::Result;
-use crate::sevenmark::parser::brace::brace_include::brace_include_parser;
+
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let result = repeat(
@@ -31,6 +29,7 @@ pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkEle
             alt((
                 brace_include_parser,
                 brace_category_parser,
+                brace_code_parser,
                 brace_style_parser,
                 brace_literal_parser,
             )),

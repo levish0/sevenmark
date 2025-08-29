@@ -5,7 +5,11 @@ pub mod brace_include;
 mod category;
 mod literal;
 mod include;
+pub mod brace_code;
+mod code;
 
 pub use brace_category::*;
+pub use brace_code::*;
+pub use brace_include::*;
 pub use brace_literal::*;
 pub use brace_style::*;
