@@ -1,2 +1,4 @@
----
-some
+{{{#style="xx" #size="4" ||
+something}}}
+{{{#category what}}}
+{{{#include #x="1" #y="xx" what}}}

@@ -173,6 +173,7 @@ pub struct TextStyle {
 /// 포함 요소
 #[derive(Debug, Clone, Serialize)]
 pub struct IncludeElement {
+    pub location: Location,
     pub parameters: Parameters,
     pub content: Vec<SevenMarkElement>,
 }
