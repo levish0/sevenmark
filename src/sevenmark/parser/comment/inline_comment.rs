@@ -1,11 +1,11 @@
-use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{CommentElement, Location, SevenMarkElement};
-use winnow::Result;
+use crate::sevenmark::ParserInput;
 use winnow::ascii::line_ending;
 use winnow::combinator::{alt, eof, opt, terminated};
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{literal, take_till};
+use winnow::Result;
 
 /// Parse inline comments starting with "//"
 /// Comments continue until end of line or end of file

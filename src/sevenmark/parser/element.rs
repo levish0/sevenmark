@@ -11,11 +11,11 @@ use crate::sevenmark::parser::brace::{
     brace_category_parser, brace_literal_parser, brace_style_parser,
 };
 use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
-use crate::sevenmark::{InputSource, ParserInput};
-use winnow::Result;
+use crate::sevenmark::ParserInput;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
+use winnow::Result;
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let result = repeat(

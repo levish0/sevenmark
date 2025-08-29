@@ -1,10 +1,10 @@
-use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{EscapeElement, Location, SevenMarkElement};
-use winnow::Result;
+use crate::sevenmark::ParserInput;
 use winnow::combinator::preceded;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::{any, literal};
+use winnow::Result;
 
 pub fn escape_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start();

@@ -1,9 +1,9 @@
-use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{Location, SevenMarkElement, TextElement};
-use winnow::Result;
+use crate::sevenmark::ParserInput;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::take_while;
+use winnow::Result;
 
 /// Parse plain text content within parameter values
 /// Reads all characters except for quotes (") and backslashes (\)

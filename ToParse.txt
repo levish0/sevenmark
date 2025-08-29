@@ -1,3 +1,2 @@
-{{{#style="xx" #size="4" ||
-something}}}
-{{{#category what}}}
+---
+some

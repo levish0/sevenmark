@@ -1,11 +1,11 @@
 use super::super::element::element_parser;
-use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{Location, SevenMarkElement, TextStyle};
-use winnow::Result;
+use crate::sevenmark::ParserInput;
 use winnow::combinator::delimited;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;
+use winnow::Result;
 
 pub fn markdown_bold_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     if parser_input.state.inside_bold {

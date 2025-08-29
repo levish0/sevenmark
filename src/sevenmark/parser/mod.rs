@@ -1,5 +1,4 @@
 use crate::sevenmark::context::ParseContext;
-use winnow::Result;
 use winnow::stream::{LocatingSlice, Stateful};
 
 mod brace;

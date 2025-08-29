@@ -1,9 +1,9 @@
 use crate::sevenmark::ast::SevenMarkElement;
 use crate::sevenmark::{Location, ParserInput, TextElement};
-use winnow::Result;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;
+use winnow::Result;
 
 pub fn token_underscore_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     if parser_input.state.inside_underline {

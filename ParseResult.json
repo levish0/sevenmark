@@ -1,73 +1,12 @@
 [
-  {
-    "StyledElement": {
-      "location": {
-        "start": 0,
-        "end": 40
-      },
-      "common_style": {
-        "style": [
-          {
-            "Text": {
-              "location": {
-                "start": 11,
-                "end": 13
-              },
-              "content": "xx"
-            }
-          }
-        ],
-        "size": [
-          {
-            "Text": {
-              "location": {
-                "start": 22,
-                "end": 23
-              },
-              "content": "4"
-            }
-          }
-        ]
-      },
-      "content": [
-        {
-          "Text": {
-            "location": {
-              "start": 28,
-              "end": 37
-            },
-            "content": "something"
-          }
-        }
-      ]
-    }
-  },
+  "HLine",
   {
     "Text": {
       "location": {
-        "start": 40,
-        "end": 41
+        "start": 4,
+        "end": 8
       },
-      "content": "\n"
-    }
-  },
-  {
-    "Category": {
-      "location": {
-        "start": 41,
-        "end": 61
-      },
-      "content": [
-        {
-          "Text": {
-            "location": {
-              "start": 54,
-              "end": 58
-            },
-            "content": "what"
-          }
-        }
-      ]
+      "content": "some"
     }
   }
 ]

@@ -1,9 +1,9 @@
 use crate::sevenmark::ast::SevenMarkElement;
 use crate::sevenmark::{Location, ParserInput, TextElement};
-use winnow::Result;
 use winnow::prelude::*;
 use winnow::stream::Location as StreamLocation;
 use winnow::token::literal;
+use winnow::Result;
 
 pub fn token_asterisk_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     // Bold context에서 **을 만나면 실패 (delimiter로 사용되어야 함)
