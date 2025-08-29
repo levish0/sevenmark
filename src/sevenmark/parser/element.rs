@@ -13,11 +13,13 @@ use crate::sevenmark::parser::brace::{
     brace_style_parser, brace_tex_parser,
 };
 use crate::sevenmark::parser::comment::{inline_comment_parser, multiline_comment_parser};
+use crate::sevenmark::parser::r#macro::{
+    macro_age_parser, macro_newline_parser, macro_now_parser, macro_null_parser,
+};
 use winnow::Result;
 use winnow::combinator::alt;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
-use crate::sevenmark::parser::r#macro::{macro_age_parser, macro_newline_parser, macro_now_parser, macro_null_parser};
 
 pub fn element_parser(parser_input: &mut ParserInput) -> Result<Vec<SevenMarkElement>> {
     let result = repeat(

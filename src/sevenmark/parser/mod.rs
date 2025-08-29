@@ -6,12 +6,12 @@ mod comment;
 pub mod document;
 pub mod element;
 pub mod escape;
+mod r#macro;
 pub mod markdown;
 mod parameter;
 pub mod text;
 pub mod token;
 mod utils;
-mod r#macro;
 
 pub use document::parse_document;
 
