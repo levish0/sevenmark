@@ -1,4 +1,5 @@
 use crate::sevenmark::SevenMarkError;
+use std::collections::HashSet;
 
 macro_rules! context_setters {
     ($($name:ident => $field:ident),*) => {
@@ -18,7 +19,7 @@ macro_rules! context_setters {
     };
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub struct ParseContext {
     pub recursion_depth: usize,
     pub inside_header: bool,
@@ -28,6 +29,7 @@ pub struct ParseContext {
     pub inside_subscript: bool,
     pub inside_superscript: bool,
     pub inside_underline: bool,
+    pub line_starts: HashSet<usize>,
     pub max_recursion_depth: usize,
 }
 
@@ -43,8 +45,14 @@ impl ParseContext {
             inside_subscript: false,
             inside_superscript: false,
             inside_underline: false,
+            line_starts: HashSet::new(),
             max_recursion_depth: 16,
         }
+    }
+
+    /// 현재 위치가 라인 시작인지 확인
+    pub fn is_at_line_start(&self, position: usize) -> bool {
+        self.line_starts.contains(&position)
     }
 
     /// 재귀 깊이 증가 (in-place)

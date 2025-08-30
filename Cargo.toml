@@ -19,6 +19,7 @@ tracing-subscriber = "0.3.19"
 serde_json = "1.0.142"
 tracing-appender = "0.2.3"
 paste = "1.0.15"
+line-span = "0.1.5"
 
 [profile.dev]
 opt-level = 1

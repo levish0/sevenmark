@@ -11,6 +11,21 @@ use winnow::token::{literal, take_while};
 
 /// 헤더 파서 - # Header (1-6개의 # 지원, ! 폴딩 지원)  
 pub fn markdown_header_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
+    if parser_input.state.current_depth() > 0 {
+        return Err(winnow::error::ContextError::new());
+    }
+
+    // Check if current position is at line start
+    let current_pos = parser_input.input.current_token_start();
+    if !parser_input.state.is_at_line_start(current_pos) {
+        return Err(winnow::error::ContextError::new());
+    }
+
+    /*
+    if parser_input.state.inside_header {
+        return Err(winnow::error::ContextError::new());
+    }
+    */
     let start = parser_input.input.current_token_start();
     let (header_marks, is_folded, _, parsed_content) = (
         take_while(1..=6, '#'),

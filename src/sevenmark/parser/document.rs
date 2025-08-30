@@ -2,6 +2,8 @@ use super::element::element_parser;
 use super::{InputSource, ParserInput};
 use crate::sevenmark::ast::{SevenMarkElement, TextElement};
 use crate::sevenmark::context::ParseContext;
+use line_span::LineSpanExt;
+use std::collections::HashSet;
 use winnow::Result;
 use winnow::combinator::repeat;
 use winnow::prelude::*;
@@ -11,7 +13,16 @@ use winnow::stream::Location;
 pub fn parse_document(input: &str) -> Vec<SevenMarkElement> {
     let normalized_input = input.replace("\r\n", "\n");
 
-    let context = ParseContext::new();
+    // Pre-calculate all line start positions for O(1) lookups
+    let line_starts: HashSet<usize> = normalized_input
+        .line_spans()
+        .map(|span| span.range().start)
+        .collect();
+
+    println!("{:?}", line_starts);
+    let mut context = ParseContext::new();
+    context.line_starts = line_starts;
+
     let mut stateful_input = ParserInput {
         input: InputSource::new(&normalized_input),
         state: context,
