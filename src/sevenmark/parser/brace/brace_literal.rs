@@ -1,3 +1,4 @@
+use winnow::ascii::multispace0;
 use super::literal::literal_content_parser;
 use crate::sevenmark::ParserInput;
 use crate::sevenmark::ast::{LiteralElement, Location, SevenMarkElement};
@@ -11,9 +12,9 @@ use winnow::token::literal;
 pub fn brace_literal_parser(parser_input: &mut ParserInput) -> Result<SevenMarkElement> {
     let start = parser_input.input.current_token_start();
 
-    let parsed_content = delimited(
+    let (_, parsed_content) = delimited(
         literal("{{{"),
-        |input: &mut ParserInput| {
+        (multispace0, |input: &mut ParserInput| {
             let mut inner_input = input.clone();
             inner_input
                 .state
@@ -26,7 +27,7 @@ pub fn brace_literal_parser(parser_input: &mut ParserInput) -> Result<SevenMarkE
                 .map_err(|e| e.into_context_error())?;
             *input = inner_input;
             result
-        },
+        }),
         literal("}}}"),
     )
     .parse_next(parser_input)?;
